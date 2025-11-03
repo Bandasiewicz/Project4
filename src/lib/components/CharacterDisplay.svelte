@@ -15,11 +15,11 @@
   // convert string to number, default to 0 if they give a wierd answer
   const n = (s: string) => Number.parseInt(s, 10) || 0;
 
-  // runs when form submitted
+  // runs when forms submitted
   function handleCreate() {
     if (!name.trim()) return; // need at least a name
 
-    // build stats object
+    //  stats object
     const stats: Stats = {
       hp: n(hp),
       strength: n(strength),
