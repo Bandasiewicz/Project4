@@ -1,6 +1,8 @@
+// PageLoad = typescript type for load functions in SvelteKit
 import type { PageLoad } from './$types';
 
-/* very small: pass the route param into the page as data */
+// this function runs before +page.svelte loads
+// grabs the id from URL and passes it to the page component
 export const load: PageLoad = async ({ params }) => {
-  return { id: params.id };
+  return { slug: params.slug };
 };

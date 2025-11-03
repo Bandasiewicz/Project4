@@ -2,7 +2,6 @@
 import { writable, type Writable, get } from 'svelte/store';
 import { browser } from '$app/environment';
 
-/* types for stats + character, simple and clear */
 export type Stats = {
   hp: number;
   strength: number;
@@ -12,49 +11,48 @@ export type Stats = {
 
 export type Character = {
   id: string;          // unique id for the URL, not the name
-  name: string;        // what the user typed
+  name: string;        
   description: string; // what the user typed
-  stats: Stats;        // numbers we parsed from strings
+  stats: Stats;        
 };
 
-/* localStorage key name */
-const STORAGE_KEY = 'characters';
+const STORAGE_KEY = 'characters'; // key name for localStorage
 
-/* load any saved characters on page open (only in browser) */
+// grab saved characters when page loads (if any exist)
 function loadInitial(): Character[] {
-  if (!browser) return [];
+  if (!browser) return []; // skip if server-side rendering
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as Character[]) : [];
+    return raw ? JSON.parse(raw) : [];
   } catch {
-    return [];
+    return []; // if parse fails just start empty
   }
 }
 
-/* this is the list everyone else will read */
+// main store - starts with whatever was saved
 export const characters: Writable<Character[]> = writable(loadInitial());
 
-/* save to localStorage whenever the list changes (browser only) */
+// auto-save to localStorage whenever store changes
 if (browser) {
   characters.subscribe((list) => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     } catch {
-      /* ignore private mode / quota errors */
+      // quota exceeded or private mode, just ignore
     }
   });
 }
 
-/* add a new character to the list, returns the object */
+// adds new character to front of list
 export function addCharacter(name: string, description: string, stats: Stats) {
-  // simple id using time; if you prefer random: crypto.randomUUID()
-  const id = Date.now().toString();
+  const id = Date.now().toString(); // timestamp as id (good enough for now)
   const next: Character = { id, name, description, stats };
-  characters.update((curr) => [next, ...curr]); // new first, old under
+  // update() lets me modify store - put new one first
+  characters.update((curr) => [next, ...curr]);
   return next;
 }
 
-/* helper: get one character right now (no subscription) */
+// find character by id without subscribing (just look it up right now)
 export function getById(id: string) {
   return get(characters).find((c) => c.id === id);
 }

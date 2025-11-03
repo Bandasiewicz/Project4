@@ -5,7 +5,7 @@
 <article class="card">
   <h1>About This App</h1>
   <p>
-    Create a Fire Emblem–style character by filling in the form on the home page.
+    Create a Fire Emblem`` character by filling in the form on the home page.
     Give them a name, a short appearance description, and set HP, Strength, Magic, and Skill.
   </p>
   <p>
@@ -14,9 +14,6 @@
   </p>
   <p>
     Newest submissions appear on top and “pop” in with a tiny animation so you don’t miss them.
-  </p>
-  <p>
-    Everything is saved to your browser (localStorage). No accounts, no servers—just quick tinkering.
   </p>
   <p>
     Ready? Head back <a href="/">home</a> and forge a hero.

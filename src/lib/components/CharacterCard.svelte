@@ -1,37 +1,36 @@
 <script lang="ts">
-  import type { Character } from '$lib/characters';
+  // Character = typescript type definition
+  import type { Character } from '$lib/storage/characters';
 
-  /* this receives one character from the parent */
+  // receiving character object from parent component
   const { character } = $props<{ character: Character }>();
 </script>
 
-<!-- the <a> is the clickable thing; it builds the new URL -->
-<a class="card" href={`/char/${character.id}`}>
-  <h3>{character.name}</h3>
-  <p class="desc">{character.description}</p>
+<!--preview showing  character’s name -->
+<a href="/char/{character.id}" class="card">
+  <h2>{character.name}</h2>
 </a>
 
 <style>
   .card {
+    display: block;
     border: 2px solid var(--line);
-    border-radius: var(--card-radius);
-    padding: 16px;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
     background: #2e1f16;
+    color: var(--text);
+    text-decoration: none;
     cursor: pointer;
-    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
-    outline: none;
+    transition: background 0.2s ease;
   }
-  .card:hover, .card:focus-visible {
-    transform: translateY(-2px);
+
+  .card:hover {
     background: #413429;
   }
-  h3 {
-    margin: 0 0 6px 0;
-    color: var(--text);
-  }
-  .desc {
+
+  h2 {
     margin: 0;
     color: var(--text);
-    opacity: 0.9;
   }
 </style>

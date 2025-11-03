@@ -3,6 +3,8 @@
   <h1>William's Fire Emblem Character Creator</h1>
 </header>
 
+<a href="/about">About</a>
+
 <main class="container">
   <slot /> <!--All the svelete files that will be used will be palced inside of slot-->
   <!--This ensures that there will always be a header and a footer no matter what happens-->

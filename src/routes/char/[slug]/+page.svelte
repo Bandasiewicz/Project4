@@ -1,14 +1,15 @@
 <script lang="ts">
-  import { getBySlug, type Character } from '$lib/storage/characters'; // adjust path if needed
-
-  // Runes mode: receive props from +page.ts via $props()
+  import { getById, type Character } from '$lib/storage/characters';
+  
+  // data comes from +page.ts - contains the slug from URL
   const { data } = $props<{ data: { slug: string } }>();
-
+  
+  // stores the character we're displaying (or undefined if not found)
   let character = $state<Character | undefined>(undefined);
 
-  // When data.slug changes, look up the character
+  // runs when data.slug changes - looks up character
   $effect(() => {
-    character = getBySlug?.(data.slug);
+    character = getById(data.slug);
   });
 </script>
 
@@ -37,8 +38,11 @@
   }
   .title { margin: 0 0 8px 0; color: var(--text); }
   .sub {
-    margin: 0 0 16px 0; color: var(--text); opacity: 0.9;
-    border-bottom: 2px solid var(--line); padding-bottom: 10px;
+    margin: 0 0 16px 0;
+    color: var(--text);
+    opacity: 0.9;
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 10px;
   }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
   .stats div {
@@ -48,5 +52,6 @@
   }
   .stats span { display: block; font-size: 0.9rem; opacity: 0.9; color: var(--text); }
   .stats strong { display: block; font-size: 1.4rem; color: var(--text); }
+  .missing { color: var(--text); }
   .missing a { color: #4890fa; }
 </style>

@@ -4,5 +4,5 @@
 </script>
 
 <h1>{status}</h1>
-<p>{error?.message ?? 'Something went wrong.'}</p>
+<p>{error?.message ?? 'Something went wrong :('}</p>
 <p><a href="/">Go home</a></p>

@@ -1,21 +1,25 @@
 <script lang="ts">
-  import { addCharacter, type Stats } from '$lib/characters';
+  // addCharacter = function to add new char to store
+  // Stats = typescript type for stats object
+  import { addCharacter, type Stats } from '$lib/storage/characters';
 
-  /* form state, all simple strings, numbers parsed on submit */
+  // form inputs - $state makes them reactive (re-render when changed)
   let name = $state('');
   let description = $state('');
-  let hp = $state('0');        // defaults to 0 (as string)
+  // storing as strings bc input type="text", convert to numbers later
+  let hp = $state('0');
   let strength = $state('0');
   let magic = $state('0');
   let skill = $state('0');
 
-  /* turn string to number, safe default to 0 */
+  // helper: convert string to number, default to 0 if NaN
   const n = (s: string) => Number.parseInt(s, 10) || 0;
 
-  /* when you click the button, we add to the list */
+  // runs when form submitted
   function handleCreate() {
-    if (!name.trim()) return; // ignore empty names
+    if (!name.trim()) return; // need at least a name
 
+    // build stats object
     const stats: Stats = {
       hp: n(hp),
       strength: n(strength),
@@ -23,8 +27,9 @@
       skill: n(skill)
     };
 
-    addCharacter(name.trim(), description.trim(), stats); // store handles saving
-    // reset the form after adding
+    addCharacter(name.trim(), description.trim(), stats);
+    
+    // reset form after adding
     name = '';
     description = '';
     hp = strength = magic = skill = '0';
@@ -36,7 +41,7 @@
 
   <label>
     Name
-    <!-- bind:value makes the box live-update the variable -->
+    <!-- bind:value syncs input with variable -->
     <input placeholder="Ike" bind:value={name} />
   </label>
 
@@ -48,26 +53,30 @@
     />
   </label>
 
-  <!-- 4 small boxes for the stats; all text inputs; user types numbers -->
+  <!-- stat inputs in a grid -->
   <div class="stats-grid">
     <div class="statBox">
       <label>
         <span>HP</span>
+        <!-- inputmode="numeric" shows number keyboard on mobile -->
         <input inputmode="numeric" pattern="[0-9]*" bind:value={hp} />
       </label>
     </div>
+
     <div class="statBox">
       <label>
         <span>Strength</span>
         <input inputmode="numeric" pattern="[0-9]*" bind:value={strength} />
       </label>
     </div>
+
     <div class="statBox">
       <label>
         <span>Magic</span>
         <input inputmode="numeric" pattern="[0-9]*" bind:value={magic} />
       </label>
     </div>
+
     <div class="statBox">
       <label>
         <span>Skill</span>
@@ -159,7 +168,7 @@
     outline-offset: 2px;
   }
 
-  /* local replacement for the old .start-btn style */
+
   .primary-btn {
     display: block;
     margin-top: 20px;

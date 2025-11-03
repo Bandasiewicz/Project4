@@ -1,26 +1,32 @@
 <script lang="ts">
   import CharacterDisplay from '$lib/components/CharacterDisplay.svelte';
   import CharacterCard from '$lib/components/CharacterCard.svelte';
-  import { characters, type Character } from '$lib/characters';
-  import { scale } from 'svelte/transition'; // ANIMATION WEEEEEEEEEE
+  // characters = the store, Character = typescript type
+  import { characters, type Character } from '$lib/storage/characters';
+  // scale = animation function from svelte
+  import { scale } from 'svelte/transition';
 
-  /* the list we will render */
+  // local copy of character list for rendering
   let list = $state<Character[]>([]);
 
-  /* subscribe to the store; when it changes, update list */
+  // $effect runs whenever dependencies change (similar to useEffect in react)
   $effect(() => {
-    const unsub = characters.subscribe((v) => { list = v; });
+    // subscribe to store - function runs every time store updates
+    const unsub = characters.subscribe((v) => { 
+      list = v; // copy store value to local list
+    });
+    // cleanup function - unsubscribe when component unmounts
     return () => unsub();
   });
 </script>
 
-<!-- form on top -->
+
+<!-- imported form will go on top  -->
 <CharacterDisplay />
 
-<!-- list under -->
+
 <section class="stack">
   {#each list as ch}
-    <!-- small scale-in so new items feel alive; minimal duration -->
     <div in:scale={{ duration: 120 }}>
       <CharacterCard character={ch} />
     </div>
