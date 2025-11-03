@@ -52,7 +52,7 @@ export function addCharacter(name: string, description: string, stats: Stats) {
   return next;
 }
 
-// find character by id without subscribing (just look it up right now)
+// find character by id (just look it up right now)
 export function getById(id: string) {
   return get(characters).find((c) => c.id === id);
 }
