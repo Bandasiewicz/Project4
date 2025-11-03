@@ -1,38 +1,17 @@
-# sv
+William Bandasiewicz's Project 4:
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Features:
 
-## Creating a project
+1. The main purpose of the wesbite is to allow the user to create custom Fire Emblem characters by entering a name, appearance description, and four stats (HP, Strength, Magic, and Skill).
+2. All created characters appear as clickable cards in a list on the home page.
+3. New characters appear at the top of the list.
+4. Clicking any character card navigates to a page showing the character's full info.
+5. Character data persists across browser sessions using localStorage, so characters remain saved even after closing the browser. (is in character.ts in the loadInitial() function)
+6. The site includes an About page explaining how to use the site.
+7. The form resets automatically after submitting a new character.
 
-If you're seeing this, you've probably already done this step. Congrats!
 
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Resources Used:
+https://stackoverflow.com/questions/tagged/svelte
+https://www.youtube.com/watch?v=wo-WCsg_5tU&list=PLC3y8-rFHvwiYZOsc2D8AO1MYwLjZQrKx&index=32
+https://www.youtube.com/watch?v=jBSnjlp-ZYw
