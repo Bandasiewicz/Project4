@@ -12,7 +12,7 @@
   let magic = $state('0');
   let skill = $state('0');
 
-  // helper: convert string to number, default to 0 if NaN
+  // convert string to number, default to 0 if they give a wierd answer
   const n = (s: string) => Number.parseInt(s, 10) || 0;
 
   // runs when form submitted
